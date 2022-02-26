@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: echo-service
+  namespace: {{ required "Missing value NAMESPACE" .Values.NAMESPACE }}
+  labels:
+    app: echo-service
+spec:
+  selector:
+    matchLabels:
+      app: echo-service
+  template:
+    metadata:
+      labels:
+        app: echo-service
+    spec:
+      containers:
+        - name: echo-service
+          image: hashicorp/http-echo
+          args:
+            - "-text=Hello-world-4"
